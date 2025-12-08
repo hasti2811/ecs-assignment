@@ -26,4 +26,4 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       - name: test pipeline, print AWS region
-        uses: 'echo AWS region is $AWS_REGION'
+        run: 'echo AWS region is $AWS_REGION'
