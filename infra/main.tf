@@ -1,12 +1,12 @@
 module "vpc" {
-  source = "./modules/vpc"
-  vpc_cidr = var.vpc_cidr
-  public-subnet-1-cidr = var.public-subnet-1-cidr
-  public-subnet-2-cidr = var.public-subnet-2-cidr
+  source                = "./modules/vpc"
+  vpc_cidr              = var.vpc_cidr
+  public-subnet-1-cidr  = var.public-subnet-1-cidr
+  public-subnet-2-cidr  = var.public-subnet-2-cidr
   private-subnet-1-cidr = var.private-subnet-1-cidr
   private-subnet-2-cidr = var.private-subnet-2-cidr
-  az-1 = var.az-1
-  az-2 = var.az-2
+  az-1                  = var.az-1
+  az-2                  = var.az-2
 }
 
 module "ecr" {
@@ -20,8 +20,8 @@ module "ecs" {
     module.vpc.private_subnet_2_id
   ]
   alb_tg_arn = module.alb.alb_tg_arn
-  ecs_sg_id = module.sg.ecs_sg_id
-  img_uri = module.ecr.image_uri_main
+  ecs_sg_id  = module.sg.ecs_sg_id
+  img_uri    = module.ecr.image_uri_main
 }
 
 module "alb" {
@@ -31,8 +31,8 @@ module "alb" {
     module.vpc.public_subnet_2_id
   ]
   alb_sg_id = module.sg.alb_sg_id
-  vpc_id = module.vpc.vpc_id
-  cert_arn = module.acm.cert_arn
+  vpc_id    = module.vpc.vpc_id
+  cert_arn  = module.acm.cert_arn
 }
 
 module "sg" {
@@ -41,15 +41,15 @@ module "sg" {
 }
 
 module "acm" {
-  source = "./modules/acm"
+  source         = "./modules/acm"
   subdomain_name = var.subdomain_name
-  zone_name = var.zone_name
+  zone_name      = var.zone_name
 }
 
 module "route53" {
-  source = "./modules/route53"
-  alb_dns_name = module.alb.alb_dns_name
+  source         = "./modules/route53"
+  alb_dns_name   = module.alb.alb_dns_name
   subdomain_name = var.subdomain_name
-  zone_name = var.zone_name
-  alb_zone_id = module.alb.alb_zone_id
+  zone_name      = var.zone_name
+  alb_zone_id    = module.alb.alb_zone_id
 }

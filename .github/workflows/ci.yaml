@@ -2,12 +2,6 @@ name: CI
 
 on:
   workflow_dispatch:
-    inputs:
-      docker-question:
-        description: 'Do you want to build and push the docker image?'
-        required: true
-        type: string
-        default: 'no'
 
 env:
   AWS_REGION: 'eu-west-2'
