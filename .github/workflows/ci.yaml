@@ -34,11 +34,11 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: checkout code
-        uses: actions/checkoute@v3
+        uses: actions/checkout@v3
 
       - name: login to ECR
         run: |
-        aws ecr get-login-password --region ${{ env.AWS_REGION }} | docker login --username AWS --password-stdin 313196412030.dkr.ecr.eu-west-2.amazonaws.com
+          aws ecr get-login-password --region ${{ env.AWS_REGION }} | docker login --username AWS --password-stdin 313196412030.dkr.ecr.eu-west-2.amazonaws.com
 
       - name: build docker image
         run: echo "hello world"
