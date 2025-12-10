@@ -2,26 +2,26 @@ variable "vpc_cidr" {
   type = string
 }
 
-variable "public-subnet-1-cidr" {
+variable "public_subnet_1_cidr" {
   type = string
 }
 
-variable "public-subnet-2-cidr" {
+variable "public_subnet_2_cidr" {
   type = string
 }
 
-variable "private-subnet-1-cidr" {
+variable "private_subnet_1_cidr" {
   type = string
 }
 
-variable "private-subnet-2-cidr" {
+variable "private_subnet_2_cidr" {
   type = string
 }
 
-variable "az-1" {
+variable "az_1" {
   type = string
 }
 
-variable "az-2" {
+variable "az_2" {
   type = string
 }

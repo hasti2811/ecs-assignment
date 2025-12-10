@@ -1,12 +1,12 @@
 module "vpc" {
   source                = "./modules/vpc"
   vpc_cidr              = var.vpc_cidr
-  public-subnet-1-cidr  = var.public-subnet-1-cidr
-  public-subnet-2-cidr  = var.public-subnet-2-cidr
-  private-subnet-1-cidr = var.private-subnet-1-cidr
-  private-subnet-2-cidr = var.private-subnet-2-cidr
-  az-1                  = var.az-1
-  az-2                  = var.az-2
+  public_subnet_1_cidr  = var.public_subnet_1_cidr
+  public_subnet_2_cidr  = var.public_subnet_2_cidr
+  private_subnet_1_cidr = var.private_subnet_1_cidr
+  private_subnet_2_cidr = var.private_subnet_2_cidr
+  az_1                  = var.az_1
+  az_2                  = var.az_2
 }
 
 module "ecr" {

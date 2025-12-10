@@ -11,27 +11,27 @@ resource "aws_internet_gateway" "igw" {
 # public subnets
 resource "aws_subnet" "public-subnet-1" {
   vpc_id     = aws_vpc.my-vpc.id
-  availability_zone = var.az-1
-  cidr_block = var.public-subnet-1-cidr
+  availability_zone = var.az_1
+  cidr_block = var.public_subnet_1_cidr
 }
 
 resource "aws_subnet" "public-subnet-2" {
   vpc_id     = aws_vpc.my-vpc.id
-  availability_zone = var.az-2
-  cidr_block = var.public-subnet-2-cidr
+  availability_zone = var.az_2
+  cidr_block = var.public_subnet_2_cidr
 }
 
 # private subnets
 resource "aws_subnet" "private-subnet-1" {
   vpc_id     = aws_vpc.my-vpc.id
-  availability_zone = var.az-1
-  cidr_block = var.private-subnet-1-cidr
+  availability_zone = var.az_1
+  cidr_block = var.private_subnet_1_cidr
 }
 
 resource "aws_subnet" "private-subnet-2" {
   vpc_id     = aws_vpc.my-vpc.id
-  availability_zone = var.az-2
-  cidr_block = var.private-subnet-2-cidr
+  availability_zone = var.az_2
+  cidr_block = var.private_subnet_2_cidr
 }
 
 # elastic IPs
