@@ -20,7 +20,7 @@ I created a Route 53 and ACM module to point my domain to the ALB DNS name and t
 
 Then i created the ECS module so that I can run my image as a container on the AWS cloud.
 
-Finally I automated code changes through CI/CD so that when a developer makes changes, they can build the docker image from GitHub actions. They can also apply the infrastructure and destroy it too because I have made pipelines for those functions too.
+Finally I automated code changes through CI/CD so that when a developer makes changes, they can build the docker image and push it to ECR from GitHub actions. This means that the terraform infrastructure can pull updated images. They can also apply the infrastructure and destroy it too because I have made pipelines for those functions too.
 
 ## Architecture Diagram
 
