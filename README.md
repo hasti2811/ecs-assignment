@@ -78,6 +78,12 @@ The security group for the ECS tasks allows incoming HTTP, HTTPS, and the docker
 
 <img src="./readme-images/sg-ecs.png">
 
+## The resource map for the VPC
+
+<img src="./readme-images/public-rtb-resource-map.png">
+<img src="./readme-images/private-rtb-1-resource-map.png">
+<img src="./readme-images/private-rtb-2-resource-map.png">
+
 ## Local App Setup
 
 ```bash
