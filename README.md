@@ -26,6 +26,58 @@ Finally I automated code changes through CI/CD so that when a developer makes ch
 
 <img src="./readme-images/terraform arch.drawio.png">
 
+File structure:
+
+```
+.
+.github/
+└── workflows
+    ├── cd.yaml
+    ├── ci.yaml
+    └── destroy.yaml
+infra
+├── main.tf
+├── modules
+│   ├── acm
+│   │   ├── main.tf
+│   │   ├── output.tf
+│   │   └── variables.tf
+│   ├── alb
+│   │   ├── main.tf
+│   │   ├── output.tf
+│   │   └── variables.tf
+│   ├── ecr
+│   │   ├── main.tf
+│   │   └── output.tf
+│   ├── ecs
+│   │   ├── main.tf
+│   │   └── variables.tf
+│   ├── route53
+│   │   ├── main.tf
+│   │   └── variables.tf
+│   ├── sg
+│   │   ├── main.tf
+│   │   ├── output.tf
+│   │   └── variables.tf
+│   └── vpc
+│       ├── main.tf
+│       ├── output.tf
+│       └── variables.tf
+├── provider.tf
+├── terraform.tfvars
+└── variables.tf
+```
+
+## Security Group for ALB
+
+The security group for the load balancer allows incomming HTTP, HTTPS, and the docker image container port traffic from the IPv4 internet (0.0.0.0/0)
+
+<img src="./readme-images/sg-alb.png">
+
+The security group for the ECS tasks allows incoming HTTP, HTTPS, and the docker image container port traffic from the security group of the ALB
+
+<img src="./readme-images/sg-ecs.png">
+
 ## Local App Setup
 
 ```bash
