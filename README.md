@@ -84,6 +84,15 @@ The security group for the ECS tasks allows incoming HTTP, HTTPS, and the docker
 <img src="./readme-images/private-rtb-1-resource-map.png">
 <img src="./readme-images/private-rtb-2-resource-map.png">
 
+## Route 53 and ACM certificate
+
+<img src="./readme-images/route53-hosted-zone-records.png">
+<img src="./readme-images/acm.png">
+
+## The ALB resource map
+
+<img src="./readme-images/alb-resource-map.png">
+
 ## Local App Setup
 
 ```bash
