@@ -1,4 +1,32 @@
-## Local app setup 💻
+# My Production level ECS project
+
+### In this project I deploy a containerised app using Docker to AWS with Infrastructure as Code using Terraform and automating developer changes using GitHub Actions as my CI/CD.
+
+## Project Overview
+
+I have containerised an open source application using docker to ensure that the app runs the same on every environment. I used multistage builds in order to keep the docker image to a small size, I have also ensured that the Docker image runs as a rootless user for security purposes.
+
+I created an ECR repo to store my image, and I made the infrastructure using ClickOps (deploying via the AWS console). This was just the first part, I tore it all down and began the infrastructure using Terraform as my Infrastructure as Code tool.
+
+I then started the infrastructure for the project. I started with the provider block to ensure that I am deploying on AWS. I made modules for each resource I needed. Firstly I started with VPC so I made my public and private subnets, route tables, NAT gateways, internet gateways, and configured 2 availability zones within the region.
+
+I created security groups for a load balancer which accepts HTTP, HTTPS, and my container port traffic from the internet. I then made a security group for the ECS tasks that accept the same traffic but only from the load balancer. This ensures that the ECS tasks do not get requests from the internet, the requests must come from the load balancer.
+
+Then i set up the Application Load balancer, the ALB listeners, and a target group so that I can distribute traffic to both private subnets. I also made sure that HTTP requests are redirected to HTTPS.
+
+I also made an ECR module to reference my existing ECR repo, this is so I can output my image URI.
+
+I created a Route 53 and ACM module to point my domain to the ALB DNS name and to also give it a SSL/TLS certificate to enable HTTPS.
+
+Then i created the ECS module so that I can run my image as a container on the AWS cloud.
+
+Finally I automated code changes through CI/CD so that when a developer makes changes, they can build the docker image from GitHub actions. They can also apply the infrastructure and destroy it too because I have made pipelines for those functions too.
+
+## Architecture Diagram
+
+<img src="./readme-images/terraform arch.drawio.png">
+
+## Local App Setup
 
 ```bash
 yarn install
