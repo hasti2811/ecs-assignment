@@ -26,7 +26,7 @@ Finally I automated code changes through CI/CD so that when a developer makes ch
 
 <img src="./readme-images/terraform arch.drawio.png">
 
-File structure:
+## File structure:
 
 ```
 .
