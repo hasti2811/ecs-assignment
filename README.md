@@ -84,31 +84,71 @@ The security group for the ECS tasks allows incoming HTTP, HTTPS, and the docker
 <img src="./readme-images/private-rtb-1-resource-map.png">
 <img src="./readme-images/private-rtb-2-resource-map.png">
 
+As we can see I have configured it so that there is one public route table which has both public subnets associated to it, it routes them to the internet gateway. Then I have a private route tables for each private subnet, it routes each subnet to its own NAT gateway. The reason why I have 2 NAT gateways in my infrastructure is because of high availability. There is a NAT gateway in each public subnet so that if one availability zone goes down, the other availability zone is still up and running because it has its own NAT gateway
+
+## The ECR repo
+
+<img src="./readme-images/ecr-repo.png">
+
+I did this part manually and locally and i reference the ECR repo in my terraform ECR module with a data block. I also ensure that developers changes are automated and a new docker image is built and pushed to ECR through my CI pipeline
+
+## The ALB resource map
+
+<img src="./readme-images/alb-resource-map.png">
+
+Here we can see that the HTTP listener redirects HTTP requests to the HTTPS listener, and the HTTPS listener forwards the HTTPS requests to the target group which automatically registers targets via the ECS service. Both targets are healthy
+
 ## Route 53 and ACM certificate
 
 <img src="./readme-images/route53-hosted-zone-records.png">
 <img src="./readme-images/acm.png">
 
-## The ALB resource map
-
-<img src="./readme-images/alb-resource-map.png">
+Here we can see that I have an Alias A record that points my domain name to the ALB dNS name, so that whenever someone visits my domain they are pointed to the ALB DNS name. I have also configured a CNAME record for the SSL/TLS certificate.
 
 ## ECS cluster service + tasks
 
 <img src="./readme-images/cluster-services.png">
 <img src="./readme-images/cluster-tasks.png">
 
+Here I have configred a task definition which is trigged through my ECS service, this creates the amount of tasks specified in the task definition. Both tasks are running and healthy
+
 ## CI pipeline, this builds the docker image with updated changes and pushes it to ECR
 
 <img src="./readme-images/CI-pipeline.png">
+
+My CI pipeline is a manual trigger. Firstly it checks out the code and configures AWS credentials. I have used secrets to store my AWS access keys because that is sensitive data. Then it logs into ECR and builds a new docker image and pushes it to ECR. So whenever developers make changes to the code and push to GitHub, they can manually run the pipeline to build an updated docker image. Then the CD pipeline can be run to deploy the updated docker image
 
 ## CD pipeline, this runs terraform apply and starts building the infrastructure. I have also included a confirmation check
 
 <img src="./readme-images/CD-pipeline.png">
 
+My CD pipeline is a manual trigger. It has a safety check to ensure that the developer types 'yes' to run the pipeline. Firstly it checks out the code and configures AWS credentials. I have used secrets to store my AWS access keys because that is sensitive data. After that it sets up terraform and runs 3 terraform commands:
+
+```
+terraform init
+terraform plan
+terraform apply --auto-approve
+```
+
+This allows us to initialise the terraform, we also get to see the plan in the pipeline and it then builds the infrastructure
+
 ## Destroy infra pipeline, this runs terraform destroy and removes the infrastructure. I have also included a confirmation check
 
 <img src="./readme-images/destroy-infra-pipeline.png">
+
+My destroy infra pipeline is a manual trigger. It has a safety check to ensure that the developer types 'yes' to run the pipeline. Firstly it checks out the code and configures AWS credentials. I have used secrets to store my AWS access keys because that is sensitive data. After that it sets up terraform and runs the command:
+
+```
+terraform init
+```
+
+This initialises the terraform, after that we run the command:
+
+```
+terraform destroy --auto-approve
+```
+
+This tears down the infrastructure
 
 ## Local App Setup
 
