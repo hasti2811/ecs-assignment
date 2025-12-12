@@ -150,6 +150,10 @@ terraform destroy --auto-approve
 
 This tears down the infrastructure
 
+## This is the deployed app
+
+<img src="./readme-images/app-img.png">
+
 ## Local App Setup
 
 ```bash
