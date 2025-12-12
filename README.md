@@ -1,6 +1,6 @@
 # My Production level ECS project
 
-### In this project I deploy a containerised app using Docker to AWS with Infrastructure as Code using Terraform and automating developer changes using GitHub Actions as my CI/CD.
+### In this project I deploy a containerised app using Docker to AWS with Infrastructure as Code using Terraform and automate developer changes using GitHub Actions as my CI/CD.
 
 ## Project Overview
 
@@ -92,6 +92,23 @@ The security group for the ECS tasks allows incoming HTTP, HTTPS, and the docker
 ## The ALB resource map
 
 <img src="./readme-images/alb-resource-map.png">
+
+## ECS cluster service + tasks
+
+<img src="./readme-images/cluster-services.png">
+<img src="./readme-images/cluster-tasks.png">
+
+## CI pipeline, this builds the docker image with updated changes and pushes it to ECR
+
+<img src="./readme-images/CI-pipeline.png">
+
+## CD pipeline, this runs terraform apply and starts building the infrastructure. I have also included a confirmation check
+
+<img src="./readme-images/CD-pipeline.png">
+
+## Destroy infra pipeline, this runs terraform destroy and removes the infrastructure. I have also included a confirmation check
+
+<img src="./readme-images/destroy-infra-pipeline.png">
 
 ## Local App Setup
 
